@@ -59,8 +59,8 @@ Tu entorno de escritorio simula con gran detalle el comportamiento clásico y mo
 ---
 
 <div align="center">
+<img src="capturas_del_proyecto/arrancando w11.png" alt="arrancando w11" width="700"/>
 
-<img src="capturas_del_proyecto/desktop.png" alt="escritorio de windows 11" width="700"/>
 
 <br><br>
 
@@ -68,7 +68,7 @@ Tu entorno de escritorio simula con gran detalle el comportamiento clásico y mo
 
 <br><br>
 
-<img src="capturas_del_proyecto/arrancando w11.png" alt="arrancando w11" width="700"/>
+<img src="capturas_del_proyecto/desktop.png" alt="escritorio de windows 11" width="700"/>
 
 <br><br>
 
