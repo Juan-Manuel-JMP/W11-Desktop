@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 - Escritorio</title>
+    <link rel="shortcut icon" href="./ico/win11.png" type="image/x-icon">
+    <script>
+        if (!sessionStorage.getItem("logueado")) {
+            location.replace("iniciow11.html");
+        }
+    </script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body oncontextmenu="return false;">
+
+    <!-- pantalla para apagar y reiniciar -->
+    <div id="screen-off">
+        <div id="screen-off-content">
+            <h1 id="screen-off-text">Apagando...</h1>
+            <br>
+            <button id="power-on-btn" class="win-btn" onclick="powerOnPC()"
+                style="display:none; padding: 8px 16px; font-size:14px; margin-top:20px;">🔌 Encender PC</button>
+        </div>
+    </div>
+
+    <!-- escritorio -->
+    <div id="desktop">
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('mycomputer')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/fluency/48/monitor--v1.png"
+                    alt="monitor--v1" /></div>
+            <div class="icon-title">Este Equipo</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('mydocuments')">
+            <div class="icon-img"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/folder-invoices--v2.png" alt="folder-invoices--v2" /></div>
+            <div class="icon-title">Mis Documentos</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('vscode')">
+            <div class="icon-img"><img width="33" height="33"
+                    src="https://img.icons8.com/color/48/visual-studio-code-2019.png" alt="visual-studio-code-2019" />
+            </div>
+            <div class="icon-title">VS Code</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('solitaire')">
+            <div class="icon-img"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/microsoft-solitaire-collection.png"
+                    alt="microsoft-solitaire-collection" /></div>
+            <div class="icon-title">Solitario</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('chess')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/color/48/chessboard.png"
+                    alt="chessboard" /></div>
+            <div class="icon-title">Ajedrez</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('wordpad')">
+            <div class="icon-img"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="word" /></div>
+            <div class="icon-title">WordPad</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('paint')">
+            <div class="icon-img"><img width="30" height="30"
+                    src="https://img.icons8.com/3d-fluency/94/paint-palette.png" alt="paint-palette" /></div>
+            <div class="icon-title">Paint</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('chrome')">
+            <div class="icon-img"><img width="35" height="35" src="https://img.icons8.com/fluency/48/chrome.png"
+                    alt="chrome" /></div>
+            <div class="icon-title">Google Chrome</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('recyclebin')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/color/48/recycle-bin.png"
+                    alt="recycle-bin" /></div>
+            <div class="icon-title">Papelera</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('displayprops')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/fluency/48/settings.png"
+                    alt="settings" /></div>
+            <div class="icon-title">Ajustes</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('calculator')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/fluency/48/calculator--v1.png"
+                    alt="calculator--v1" /></div>
+            <div class="icon-title">Calculadora</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('notepad')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/fluency/48/notepad.png"
+                    alt="notepad" /></div>
+            <div class="icon-title">Bloc de notas</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('cmd')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/3d-fluency/94/console.png"
+                    alt="console" /></div>
+            <div class="icon-title">Símbolo del sistema</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('musicplayer')">
+            <div class="icon-img"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/windows-media-player.png" alt="windows-media-player" /></div>
+            <div class="icon-title">Música</div>
+        </div>
+
+        <div class="desktop-icon" onclick="selectDesktopIcon(this)" ondblclick="openApp('photoviewer')">
+            <div class="icon-img"><img width="30" height="30" src="https://img.icons8.com/fluency/48/photos.png"
+                    alt="photos" /></div>
+            <div class="icon-title">Visor de Fotos</div>
+        </div>
+    </div>
+
+    <!-- menu de apagar y reiniciar -->
+    <div id="desktop-context-menu" class="context-menu">
+        <div class="menu-item" onclick="createNewFilePrompt()"><img width="10" height="10"
+                src="https://img.icons8.com/external-obvious-flat-kerismaker/48/external-business-office-stationery-flat-obvious-flat-kerismaker-33.png"
+                alt="bloc-notes" /> Nuevo Documento</div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" onclick="openApp('displayprops')"><img width="10" height="10"
+                src="https://img.icons8.com/external-flat-andi-nur-abdillah/64/external-Paintbrush-graphic-design-(flat)-flat-andi-nur-abdillah.png"
+                alt="pincel" /> Personalizar fondo de pantalla</div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" onclick="shutdownPC()">⏻ Apagar equipo</div>
+        <div class="menu-item" onclick="restartPC()">🔄 Reiniciar equipo</div>
+    </div>
+
+    <!-- barra de tareas -->
+    <div id="taskbar">
+        <div id="start-btn" onclick="toggleStartMenu()" title="Inicio"><img width="30" height="30"
+                src="https://img.icons8.com/color/48/windows-11.png" alt="windows-11" /></div>
+        <div id="taskbar-apps">
+            <div class="tb-icon" onclick="openApp('mycomputer')" title="Este Equipo"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/monitor--v1.png" alt="monitor--v1" /></div>
+            <div class="tb-icon" onclick="openApp('mydocuments')" title="Mis Documentos"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/windows-explorer.png" alt="windows-explorer" /></div>
+            <div class="tb-icon" onclick="openApp('vscode')" title="Visual Studio Code"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/visual-studio-code-2019.png" alt="visual-studio-code-2019" />
+            </div>
+            <div class="tb-icon" onclick="openApp('solitaire')" title="Solitario"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/microsoft-solitaire-collection.png"
+                    alt="microsoft-solitaire-collection" /></div>
+            <div class="tb-icon" onclick="openApp('chess')" title="Ajedrez"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/chessboard.png" alt="chessboard" /></div>
+            <div class="tb-icon" onclick="openApp('wordpad')" title="WordPad"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="word" /></div>
+            <div class="tb-icon" onclick="openApp('paint')" title="Paint"><img width="30" height="30"
+                    src="https://img.icons8.com/3d-fluency/94/paint-palette.png" alt="paint-palette" /></div>
+            <div class="tb-icon" onclick="openApp('chrome')" title="Google Chrome"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/chrome.png" alt="chrome" /></div>
+            <div class="tb-icon" onclick="openApp('recyclebin')" title="Papelera"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/recycle-bin.png" alt="recycle-bin" /></div>
+            <div class="tb-icon" onclick="openApp('calculator')" title="Calculadora"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/calculator--v1.png" alt="calculator--v1" /></div>
+            <div class="tb-icon" onclick="openApp('notepad')" title="Bloc de notas"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/notepad.png" alt="notepad" /></div>
+            <div class="tb-icon" onclick="openApp('cmd')" title="CMD"><img width="30" height="30"
+                    src="https://img.icons8.com/3d-fluency/94/console.png" alt="console" /></div>
+            <div class="tb-icon" onclick="openApp('musicplayer')" title="Reproductor de Música"><img width="30"
+                    height="30" src="https://img.icons8.com/fluency/48/windows-media-player.png"
+                    alt="windows-media-player" /></div>
+        </div>
+        <div id="tray">
+            <div class="tray-clock-container">
+                <span id="clock-time">12:00 PM</span>
+                <span id="clock-date">12/10/2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- menu inicio -->
+    <div id="start-menu" class="start-menu">
+        <div class="start-search">
+            <input type="text" placeholder="Busca las aplicaciones o archivos">
+        </div>
+        <div class="start-grid">
+            <div class="start-item" onclick="openApp('mycomputer'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/monitor--v1.png" alt="monitor--v1" /><span>Este Equipo</span>
+            </div>
+            <div class="start-item" onclick="openApp('mydocuments'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/folder-invoices--v2.png"
+                    alt="folder-invoices--v2" /><span>Mis Documentos</span></div>
+            <div class="start-item" onclick="openApp('vscode'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/visual-studio-code-2019.png"
+                    alt="visual-studio-code-2019" /><span>VS Code</span></div>
+            <div class="start-item" onclick="openApp('solitaire'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/microsoft-solitaire-collection.png"
+                    alt="microsoft-solitaire-collection" /><span>Solitario</span></div>
+            <div class="start-item" onclick="openApp('chess'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/chessboard.png" alt="chessboard" /><span>Ajedrez</span></div>
+            <div class="start-item" onclick="openApp('wordpad'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="word" /><span>WordPad</span>
+            </div>
+            <div class="start-item" onclick="openApp('paint'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/3d-fluency/94/paint-palette.png"
+                    alt="paint-palette" /><span>Paint</span></div>
+            <div class="start-item" onclick="openApp('chrome'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/chrome.png" alt="chrome" /><span>Chrome</span></div>
+            <div class="start-item" onclick="openApp('displayprops'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/settings.png" alt="settings" /><span>Ajustes</span></div>
+            <div class="start-item" onclick="openApp('calculator'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/calculator--v1.png"
+                    alt="calculator--v1" /><span>Calculadora</span></div>
+            <div class="start-item" onclick="openApp('notepad'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/external-obvious-flat-kerismaker/48/external-business-office-stationery-flat-obvious-flat-kerismaker-33.png"
+                    alt="bloc-notes" /><span>Bloc de notas</span></div>
+            <div class="start-item" onclick="openApp('cmd'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/3d-fluency/94/console.png" alt="console" /><span>CMD</span></div>
+            <div class="start-item" onclick="openApp('musicplayer'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/windows-media-player.png"
+                    alt="windows-media-player" /><span>Reproductor</span></div>
+            <div class="start-item" onclick="openApp('photoviewer'); toggleStartMenu()"><img width="30" height="30"
+                    src="https://img.icons8.com/fluency/48/photos.png" alt="photos" /><span>Visor de Fotos</span></div>
+        </div>
+        <div class="start-footer">
+            <button class="power-btn" onclick="shutdownPC()">⏻ Apagar</button>
+            <button class="power-btn" onclick="restartPC()">🔄 Reiniciar</button>
+        </div>
+    </div>
+
+    <!-- ventanas de aplicaciones -->
+
+    <!-- vs code -->
+    <div id="win-vscode" class="window" style="width: 1000px; height: 480px; top: 30px; left: 80px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-vscode')">
+            <div class="ribbon-btn"><img width="20" height="20"
+                    src="https://img.icons8.com/color/48/visual-studio-code-2019.png" alt="visual-studio-code-2019" />
+                Visual Studio Code</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-vscode')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-vscode')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-vscode')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="padding: 0; background: #1e1e1e; color: #d4d4d4;">
+            <div class="vscode-top-bar">
+                <button class="vsc-btn" onclick="runVscodeLiveWeb()">▶ Mostrar Página Web</button>
+                <span style="font-size: 11px; color: #aaa; margin-left: 10px;">Hace click en 'Renderizar' para
+                    actualizar la pagina.</span>
+            </div>
+            <div class="vscode-body flex-row" style="flex: 1; overflow: hidden;">
+                <div class="vscode-sidebar">
+                    <div class="vsc-side-title">archivos</div>
+                    <div class="vsc-file active" onclick="switchVscTab('html')"><img width="15" height="15"
+                            src="https://img.icons8.com/color/48/html-5--v1.png" alt="html-5--v1" /> index.html</div>
+                    <div class="vsc-file" onclick="switchVscTab('css')"><img width="15" height="15"
+                            src="https://img.icons8.com/color/48/css3.png" alt="css3" /> style.css</div>
+                    <div class="vsc-file" onclick="switchVscTab('js')"><img width="15" height="15"
+                            src="https://img.icons8.com/color/48/javascript--v1.png" alt="javascript--v1" /> app.js
+                    </div>
+                </div>
+                <div class="flex-col" style="flex: 1; border-right: 1px solid #333;">
+                    <div id="vsc-tab-title"
+                        style="padding: 4px 10px; background: #252526; font-size: 11px; color: #888;">index.html</div>
+                    <textarea id="vscode-code-editor" class="vscode-editor" spellcheck="false"></textarea>
+                </div>
+                <!-- vista previa -->
+                <div class="vscode-preview-container flex-col">
+                    <div class="ribbon-btn"><img width="20" height="20"
+                            src="https://img.icons8.com/fluency/48/chrome.png" alt="chrome" />Vista Previa Navegador Web
+                    </div>
+                    <iframe id="vscode-live-preview" class="vsc-preview-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- juego solitario  -->
+    <div id="win-solitaire" class="window" style="width: 760px; height: 560px; top: 40px; left: 120px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-solitaire')">
+            <div class="ribbon-btn"><img width="20" height="20"
+                    src="https://img.icons8.com/fluency/48/microsoft-solitaire-collection.png"
+                    alt="microsoft-solitaire-collection" /> Solitario</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-solitaire')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-solitaire')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-solitaire')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="background: #0d5c28; padding: 15px;">
+            <div class="toolbar"
+                style="background: rgba(0,0,0,0.2); border:none; margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+                <button class="win-btn" onclick="initSolitaire()"> Nueva Partida</button>
+                <select id="sol-draw-mode" class="win-btn" onchange="initSolitaire()">
+                    <option value="1">Robar 1</option>
+                    <option value="3">Robar 3</option>
+                </select>
+                <span id="sol-status" style="color: white; font-weight: 500;">Movimientos: 0</span>
+            </div>
+            <div id="solitaire-top-row" class="solitaire-row">
+                <div id="sol-stock" class="sol-card-slot"></div>
+                <div id="sol-waste" class="sol-card-slot"></div>
+                <div style="width: 30px;"></div>
+                <div id="sol-found-0" class="sol-card-slot foundation"></div>
+                <div id="sol-found-1" class="sol-card-slot foundation"></div>
+                <div id="sol-found-2" class="sol-card-slot foundation"></div>
+                <div id="sol-found-3" class="sol-card-slot foundation"></div>
+            </div>
+            <div id="solitaire-tableau" class="solitaire-tableau-row"></div>
+        </div>
+    </div>
+
+    <!-- juego ajedrez -->
+    <div id="win-chess" class="window" style="width: 540px; height: 560px; top: 50px; left: 180px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-chess')">
+            <div class="ribbon-btn"><img width="20" height="20" src="https://img.icons8.com/color/48/chessboard.png"
+                    alt="chessboard" /> Ajedrez</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-chess')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-chess')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-chess')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="align-items: center; justify-content: center; background: #222;">
+            <div class="toolbar" style="width: 100%; justify-content: space-between;">
+                <button class="win-btn" onclick="initChess()"> Reiniciar Tablero</button>
+                <span id="chess-status" style="color: #fff; font-weight: bold;">Turno: Blancas</span>
+            </div>
+            <div id="chess-board" class="chess-board"></div>
+        </div>
+    </div>
+
+    <!-- explorador de archivos y carpetas -->
+    <div id="win-mycomputer" class="window" style="width: 780px; height: 500px; top: 60px; left: 90px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-mycomputer')">
+            <div class="ribbon-btn"><img width="20" height="20" src="https://img.icons8.com/fluency/48/monitor--v1.png"
+                    alt="monitor--v1" /> Este Equipo</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-mycomputer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-mycomputer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-mycomputer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+
+        <!-- barra superior pestañas y comandos -->
+        <div class="win11-top-nav">
+            <div class="win11-tabs">
+            </div>
+            <div class="win11-command-bar">
+                <div class="nav-arrows">
+                    <button onclick="navigateExplorerUp()" title="ir atras"><img width="15" height="15"
+                            src="https://img.icons8.com/material-outlined/24/left.png" alt="left" /></button>
+                    <button onclick="navigateExplorerUp()" title="ir adelante"><img width="15" height="15"
+                            src="https://img.icons8.com/material-outlined/24/right.png" alt="right" /></button>
+                    <button onclick="navigateExplorerUp()" title="carpeta superior"><img width="15" height="15"
+                            src="https://img.icons8.com/material-outlined/24/up.png" alt="up" /></button>
+                    <button onclick="refreshExplorer()" title="actualizar"><img width="13" height="13"
+                            src="https://img.icons8.com/material-outlined/24/reboot.png" alt="reboot" /></button>
+                </div>
+                <div class="win11-address-container">
+                    <span class="folder-icon-addr"><img width="20" height="20"
+                            src="https://img.icons8.com/parakeet-line/48/monitor.png" alt="monitor" /></span>
+                    <input type="text" id="explorer-address" value="C:\" readonly>
+                </div>
+                <div class="win11-search-container">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Buscar en Este equipo">
+                </div>
+            </div>
+            <div class="win11-ribbon">
+                <button class="ribbon-btn">📄Nuevo</button>
+                <span class="ribbon-divider"></span>
+                <button class="ribbon-btn"><img width="15" height="15" src="https://img.icons8.com/fluency/48/cut.png"
+                        alt="cut" />Cortar</button>
+                <button class="ribbon-btn"><img width="15" height="15" src="https://img.icons8.com/fluency/48/copy.png"
+                        alt="copy" />Copiar</button>
+                <button class="ribbon-btn"><img width="15" height="15" src="https://img.icons8.com/fluency/48/paste.png"
+                        alt="paste" />Pegar</button>
+                <button class="ribbon-btn"><img width="15" height="15"
+                        src="https://img.icons8.com/forma-thin/24/rename--v2.png" alt="rename--v2" />Cambiar
+                    Nombre</button>
+                <button class="ribbon-btn"><img width="15" height="15"
+                        src="https://img.icons8.com/material-outlined/24/waste.png" alt="waste" />Eliminar</button>
+                <span class="ribbon-divider"></span>
+                <button class="ribbon-btn"><img width="15" height="15"
+                        src="https://img.icons8.com/cotton/64/sorting-arrows--v2.png"
+                        alt="sorting-arrows--v2" />Ordenar</button>
+                <button class="ribbon-btn"><img width="15" height="15"
+                        src="https://img.icons8.com/forma-light/24/my-computer.png" alt="my-computer" /> Vista</button>
+            </div>
+        </div>
+
+        <div class="window-content flex-row" style="padding: 0; height: calc(100% - 115px);">
+            <!-- sidebar lateral izquierda -->
+            <div class="explorer-tree-sidebar">
+                <div class="tree-section-title">Acceso rapido</div>
+                <div class="tree-item" onclick="navigateExplorer('C:\\Usuarios\\Usuario\\Mis documentos')">
+                    <img width="16" height="16" src="https://img.icons8.com/fluency/48/documents--v1.png" /> Documentos
+                </div>
+                <div class="tree-item" onclick="navigateExplorer('C:\\Usuarios\\Usuario\\Imágenes')">
+                    <img width="16" height="16" src="https://img.icons8.com/3d-fluency/94/image-gallery.png" /> Imagenes
+                </div>
+                <div class="tree-item" onclick="navigateExplorer('C:\\Usuarios\\Usuario\\Música')">
+                    <img width="16" height="16" src="https://img.icons8.com/fluency/48/windows-media-player.png" />
+                    Musica
+                </div>
+                <div class="tree-item" onclick="navigateExplorer('C:\\Usuarios\\Usuario\\Descargas')">
+                    <img width="16" height="16" src="https://img.icons8.com/fluency/48/download.png" /> Descargas
+                </div>
+
+                <div class="tree-item" onclick="navigateExplorer('C:\\Dispositivos y Unidades')">
+                    <img width="16" height="16" src="https://img.icons8.com/fluency/48/monitor.png" /> Este equipo
+                </div>
+                <div class="tree-item" onclick="navigateExplorer('C:\\Disco Local (C:)')">
+                    <img width="16" height="16" src="https://img.icons8.com/color/48/c-drive.png" /> Disco Local (C:)
+                </div>
+            </div>
+
+            <!-- contenido principal -->
+            <div class="explorer-main flex-col" style="flex:1; padding: 12px; background: #fff; overflow-y: auto;">
+                <div id="explorer-grid" class="grid-container" style="flex:1;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- mis documentos -->
+    <div id="win-mydocuments" class="window" style="width: 580px; height: 380px; top: 80px; left: 120px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-mydocuments')">
+            <div class="ribbon-btn"><img width="17" height="17"
+                    src="https://img.icons8.com/fluency/48/folder-invoices--v2.png" alt="folder-invoices--v2" /> Mis
+                Documentos</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-mydocuments')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-mydocuments')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-mydocuments')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="toolbar">
+                <button class="win-btn" onclick="createNewFilePrompt()">📄 Nuevo Documento .txt</button>
+            </div>
+            <div id="file-list" class="grid-container"></div>
+        </div>
+    </div>
+
+    <!-- papelera -->
+    <div id="win-recyclebin" class="window" style="width: 500px; height: 380px; top: 100px; left: 240px;">
+        <div class="title-bar title-bar-papelera" onmousedown="dragStart(event, 'win-recyclebin')">
+            <div class="ribbon-btn"><img width="20" height="20" src="https://img.icons8.com/color/48/recycle-bin.png"
+                    alt="recycle-bin" /> Papelera de Reciclaje</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-recyclebin')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-recyclebin')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-recyclebin')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="toolbar">
+                <button class="win-btn" onclick="emptyRecycleBin()"><img width="20" height="20"
+                        src="https://img.icons8.com/color/48/recycle-bin.png" alt="recycle-bin" /> Vaciar
+                    Papelera</button>
+            </div>
+            <div id="recycle-list" class="grid-container"></div>
+        </div>
+    </div>
+
+    <!-- wordpad -->
+    <div id="win-wordpad" class="window" style="width: 800px; height: 520px; top: 30px; left: 80px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-wordpad')">
+            <div class="ribbon-btn"><img width="16" height="16" src="https://img.icons8.com/color/48/word.png"
+                    style="vertical-align: middle; margin-right: 4px;" /> WordPad</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-wordpad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-wordpad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-wordpad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+
+        <div class="window-content flex-col"
+            style="padding:0; background:#f3f3f3; position:relative; height: calc(100% - 32px);">
+
+            <!-- cinta de opciones -->
+            <div class="wordpad-ribbon" id="wordpad-ribbon">
+                <div class="ribbon-group">
+                    <div class="ribbon-title">Archivo</div>
+                    <div class="ribbon-controls">
+                        <button class="win-btn" onclick="newWordpadDoc()" title="Nuevo">📄</button>
+                        <button class="win-btn" onclick="openWordpadDialog()" title="Abrir">📂</button>
+                        <button class="win-btn" id="word-save-btn" onclick="saveDocument()" title="Guardar">💾</button>
+                        <button class="win-btn" onclick="printWordpadDoc()" title="Imprimir">🖨️</button>
+                    </div>
+                </div>
+
+                <div class="ribbon-group">
+                    <div class="ribbon-title">Portapapeles</div>
+                    <div class="ribbon-controls">
+                        <button class="win-btn" onclick="pasteWordpad()" title="Pegar">📥</button>
+                        <button class="win-btn" onclick="applyWordpadStyle('cut')" title="Cortar">✂️</button>
+                        <button class="win-btn" onclick="applyWordpadStyle('copy')" title="Copiar">📋</button>
+                    </div>
+                </div>
+
+                <div class="ribbon-group">
+                    <div class="ribbon-title">Fuente</div>
+                    <div class="ribbon-controls">
+                        <select id="word-font-family" onchange="applyWordpadStyle('fontName', this.value)"
+                            style="width: 105px;">
+                            <option value="Segoe UI">Segoe UI</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Calibri">Calibri</option>
+                            <option value="Consolas">Consolas</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                        </select>
+                        <input id="word-font-size" list="word-size-list" value="12" style="width:38px;"
+                            onchange="setWordpadFontSize(this.value)">
+                        <datalist id="word-size-list">
+                            <option value="8">
+                            <option value="10">
+                            <option value="12">
+                            <option value="14">
+                            <option value="16">
+                            <option value="18">
+                            <option value="24">
+                            <option value="36">
+                        </datalist>
+                        <button class="win-btn" data-cmd="bold" onclick="applyWordpadStyle('bold')"><b>B</b></button>
+                        <button class="win-btn" data-cmd="italic"
+                            onclick="applyWordpadStyle('italic')"><i>I</i></button>
+                        <button class="win-btn" data-cmd="underline"
+                            onclick="applyWordpadStyle('underline')"><u>U</u></button>
+                        <input type="color" id="word-font-color" value="#000000"
+                            style="width:20px; height:20px; padding:0; border:none; background:none; cursor:pointer;"
+                            onchange="applyWordpadStyle('foreColor', this.value)" title="Color de texto">
+                    </div>
+                </div>
+
+                <div class="ribbon-group">
+                    <div class="ribbon-title">Párrafo</div>
+                    <div class="ribbon-controls">
+                        <button class="win-btn" data-cmd="justifyLeft"
+                            onclick="applyWordpadStyle('justifyLeft')">⬅</button>
+                        <button class="win-btn" data-cmd="justifyCenter"
+                            onclick="applyWordpadStyle('justifyCenter')">⏸</button>
+                        <button class="win-btn" data-cmd="justifyRight"
+                            onclick="applyWordpadStyle('justifyRight')">➡</button>
+                        <button class="win-btn" data-cmd="insertUnorderedList"
+                            onclick="applyWordpadStyle('insertUnorderedList')">•≡</button>
+                    </div>
+                </div>
+
+                <div class="ribbon-group">
+                    <div class="ribbon-title">Insertar</div>
+                    <div class="ribbon-controls">
+                        <label class="win-btn" style="cursor:pointer;" title="Imagen">
+                            🖼️<input type="file" accept="image/*" onchange="insertWordpadImage(event)"
+                                style="display:none;">
+                        </label>
+                        <button class="win-btn" onclick="insertWordpadDate()" title="Fecha y Hora">📅</button>
+                        <button class="win-btn" onclick="toggleWordpadFind(true)" title="Buscar">🔍</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- barra de busqueda y reemplazo -->
+            <div class="wordpad-findbar" id="wordpad-findbar" style="display:none;">
+                <input id="wp-find-input" placeholder="Buscar…"
+                    onkeydown="if(event.key==='Enter'){event.preventDefault();wordpadFind(event.shiftKey);}">
+                <input id="wp-replace-input" placeholder="Reemplazar…"
+                    onkeydown="if(event.key==='Enter'){event.preventDefault();wordpadReplace();}">
+                <button class="win-btn" onclick="wordpadFind(true)">▲</button>
+                <button class="win-btn" onclick="wordpadFind(false)">▼</button>
+                <button class="win-btn" onclick="wordpadReplace()">Reemplazar</button>
+                <span id="wp-find-msg" style="font-size:11px; color:#555;"></span>
+                <button class="win-btn" onclick="toggleWordpadFind(false)">✕</button>
+            </div>
+
+            <!-- nombre del archivo  -->
+            <div class="wordpad-filepath-bar">
+                <span style="font-size:11px; color:#555;">Archivo:</span>
+                <input type="text" id="doc-filename" value="Documento.txt"
+                    style="flex:1; max-width:200px; padding: 2px 4px; font-size: 11px;">
+                <span id="wordpad-saved-state" style="font-size:11px; color:#666;"></span>
+            </div>
+
+            <!-- area de trabajo  -->
+            <div class="wordpad-workspace" id="wordpad-workspace">
+                <div class="wordpad-zoomwrap" id="wordpad-zoomwrap">
+                    <div class="wordpad-page-container" id="wordpad-page">
+                        <div id="wordpad-editor" class="wordpad-paper" contenteditable="true" spellcheck="true"
+                            lang="es">¡Bienvenido a WordPad! Escribe aquí tu documento...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- barra de estado inferior -->
+            <div class="wordpad-statusbar" id="wordpad-statusbar">
+                <span id="wordpad-stats">Palabras: 0 | Caracteres: 0</span>
+                <span style="display:flex; align-items:center; gap:4px;">
+                    <button class="win-btn" onclick="setWordpadZoom(wpZoom - 10)" style="padding:1px 6px;">−</button>
+                    <input type="range" id="wordpad-zoom" min="50" max="200" value="100" style="width:80px;"
+                        oninput="setWordpadZoom(this.value)">
+                    <button class="win-btn" onclick="setWordpadZoom(wpZoom + 10)" style="padding:1px 6px;">+</button>
+                    <span id="wordpad-zoom-label" style="width:32px; text-align:right;">100%</span>
+                </span>
+            </div>
+
+            <!-- dialogos modales internos -->
+            <div class="wp-overlay" id="wp-overlay" style="display:none;">
+                <div class="wp-dialog">
+                    <div class="wp-dialog-title" id="wp-dialog-title"></div>
+                    <div id="wp-dialog-body"></div>
+                    <div class="wp-dialog-actions" id="wp-dialog-actions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- paint -->
+    <div id="win-paint" class="window" style="width: 640px; height: 480px; top: 70px; left: 220px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-paint')">
+            <div class="ribbon-btn"><img width="20" height="20"
+                    src="https://img.icons8.com/3d-fluency/94/paint-palette.png" alt="paint-palette" /> Paint</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-paint')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-paint')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-paint')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col">
+            <div class="toolbar flex-wrap">
+                <button class="win-btn active-tool" id="tool-pencil" onclick="setPaintTool('pencil')">✏️ Lápiz</button>
+                <button class="win-btn" id="tool-brush" onclick="setPaintTool('brush')">🖌️ Pincel</button>
+                <button class="win-btn" id="tool-eraser" onclick="setPaintTool('eraser')">🧽 Borrador</button>
+
+                <span>Grosor:</span>
+                <input type="range" id="paint-size" min="1" max="30" value="3" style="width:80px;">
+
+                <div class="divider"></div>
+                <button class="win-btn" id="paint-save-btn">💾 Guardar en Mis Doc.</button>
+                <button class="win-btn" onclick="clearCanvas()">Limpiar</button>
+            </div>
+            <div class="canvas-container">
+                <canvas id="paint-canvas" width="580" height="320"></canvas>
+            </div>
+            <div class="palette" id="paint-palette"></div>
+        </div>
+    </div>
+
+    <!-- visor de fotos -->
+    <div id="win-photoviewer" class="window" style="width: 560px; height: 460px; top: 90px; left: 200px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-photoviewer')">
+            <div class="ribbon-btn" id="photo-viewer-title"><img width="15" height="15"
+                    src="https://img.icons8.com/fluency/48/photos.png" alt="photos" />Fotos</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-photoviewer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-photoviewer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-photoviewer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col"
+            style="background:#111; padding: 0; justify-content:space-between; align-items:center;">
+            <div
+                style="background: #8b8888; width: 100%; padding: 6px; display: flex; justify-content: flex-start; border-bottom: 1px solid #333;">
+                <label class="win-btn" style="cursor: pointer; font-size: 11px;">
+                    📂 Abrir imagen... <input type="file" accept="image/*" onchange="loadLocalPhoto(event)"
+                        style="display:none;">
+                </label>
+            </div>
+            <div
+                style="flex: 1; display: flex; justify-content: center; align-items: center; width: 100%; overflow: hidden;">
+                <img id="photo-viewer-img" src=""
+                    style="max-width:100%; max-height:100%; object-fit:contain; transition: transform 0.2s;">
+            </div>
+            <div
+                style="background: rgb(255, 255, 255); width: 100%; padding: 6px; display: flex; justify-content: center; gap: 10px;">
+                <button class="win-btn" onclick="zoomPhoto(0.2)">🔍+</button>
+                <button class="win-btn" onclick="zoomPhoto(-0.2)">🔍-</button>
+                <button class="win-btn" onclick="resetPhotoZoom()">🔄 Restablecer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- google chrome -->
+    <div id="win-chrome" class="window" style="width: 780px; height: 520px; top: 40px; left: 100px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-chrome')">
+            <div class="ribbon-btn"><img width="20" height="20" src="https://img.icons8.com/fluency/48/chrome.png"
+                    alt="chrome" /> Google Chrome</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-chrome')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-chrome')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-chrome')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="padding: 0;">
+            <div class="chrome-bar">
+                <button class="chrome-btn" onclick="navigateChrome('home')">🏠</button>
+                <button class="chrome-btn" onclick="reloadChrome()">🔄</button>
+                <input type="text" id="chrome-url" value="https://www.google.com/search?igu=1"
+                    onkeydown="if(event.key==='Enter') navigateChrome(this.value)">
+                <button class="chrome-btn"
+                    onclick="navigateChrome(document.getElementById('chrome-url').value)">Ir</button>
+            </div>
+            <div class="chrome-bookmarks">
+                <button class="bookmark-btn" onclick="navigateChrome('https://ifts4.edu.ar/index.php')">IFTS
+                    N°4</button>
+                <button class="bookmark-btn" onclick="navigateChrome('https://www.youtube.com/embed/3nYLTiY5skU')">▶️
+                    Curso HTML en YouTube</button>
+                <button class="bookmark-btn" onclick="navigateChrome('https://es.wikipedia.org')">📚 Wikipedia</button>
+            </div>
+            <iframe id="chrome-frame" src="https://www.google.com/search?igu=1"
+                style="flex:1; border:none; width:100%; height:100%;"></iframe>
+        </div>
+    </div>
+
+    <!-- configuracion de los fondos de pantalla -->
+    <div id="win-displayprops" class="window" style="width: 440px; height: 380px; top: 100px; left: 260px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-displayprops')">
+            <div class="title-text"><img width="20" height="20" src="https://img.icons8.com/fluency/48/wallpaper.png"
+                    alt="wallpaper" /> Configuración y Fondos de Pantalla</div>
+            <div class="window-controls">
+                <button onclick="closeWindow('win-displayprops')">✕</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <p style="margin-bottom:6px;"><b>Selecciona un fondo estilo Windows 11:</b></p>
+            <select id="wallpaper-select" style="width:100%; padding:6px; margin-bottom:12px;"
+                onchange="changePresetWallpaper(this.value)">
+                <option value="./img/win11.jpg">Windows 11</option>
+                <option value="./img/win11color.png">Windows 11 Color</option>
+                <option value="linear-gradient(135deg, #1d976c, #93f9b9)">Emerald Green</option>
+                <option value="linear-gradient(135deg, #ff7e5f, #feb47b)">Sunset Glow</option>
+                <option value="linear-gradient(135deg, #4158D0, #C850C0, #FFCC70)">Neon Gradient</option>
+            </select>
+            <p style="margin-bottom:6px;"><b>O elige una imagen desde tu PC:</b></p>
+            <input type="file" id="local-wallpaper" accept="image/*" onchange="handleWallpaperUpload(event)"
+                style="width:100%;">
+        </div>
+    </div>
+
+    <!-- calculadora -->
+    <div id="win-calculator" class="window" style="width: 300px; height: 420px; top: 80px; left: 150px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-calculator')">
+            <div class="ribbon-btn"><img width="20" height="20"
+                    src="https://img.icons8.com/fluency/48/calculator--v1.png" alt="calculator--v1" /> Calculadora</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-calculator')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-calculator')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-calculator')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="background: #202020; padding: 12px; gap: 8px;">
+            <input type="text" id="calc-display" readonly value="0"
+                style="width: 100%; height: 60px; background: transparent; border: none; color: white; font-size: 28px; text-align: right; padding-right: 10px; outline: none;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; flex: 1;">
+                <button class="calc-btn" onclick="calcClear()">C</button>
+                <button class="calc-btn" onclick="calcAppend('/')">÷</button>
+                <button class="calc-btn" onclick="calcAppend('*')">×</button>
+                <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+                <button class="calc-btn" onclick="calcAppend('7')">7</button>
+                <button class="calc-btn" onclick="calcAppend('8')">8</button>
+                <button class="calc-btn" onclick="calcAppend('9')">9</button>
+                <button class="calc-btn" onclick="calcAppend('-')">-</button>
+                <button class="calc-btn" onclick="calcAppend('4')">4</button>
+                <button class="calc-btn" onclick="calcAppend('5')">5</button>
+                <button class="calc-btn" onclick="calcAppend('6')">6</button>
+                <button class="calc-btn" onclick="calcAppend('+')">+</button>
+                <button class="calc-btn" onclick="calcAppend('1')">1</button>
+                <button class="calc-btn" onclick="calcAppend('2')">2</button>
+                <button class="calc-btn" onclick="calcAppend('3')">3</button>
+                <button class="calc-btn" onclick="calcCompute()"
+                    style="grid-row: span 2; background: #0078d4; color: white;">=</button>
+                <button class="calc-btn" onclick="calcAppend('0')" style="grid-column: span 2;">0</button>
+                <button class="calc-btn" onclick="calcAppend('.')">.</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- block de notas -->
+    <div id="win-notepad" class="window" style="width: 600px; height: 450px; top: 100px; left: 200px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-notepad')">
+            <div class="ribbon-btn"><img width="20" height="20" src="https://img.icons8.com/fluency/48/notepad.png"
+                    alt="notepad" /> Sin Titulo - Block de notas</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-notepad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-notepad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-notepad')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col" style="padding: 0; background: white;">
+            <div
+                style="background: #f3f3f3; padding: 4px 8px; border-bottom: 1px solid #ddd; font-size: 12px; display: flex; gap: 10px;">
+                <span style="cursor:pointer;" onclick="saveNotepadFile()">💾 Guardar en Mis Documentos</span>
+                <span style="cursor:pointer;" onclick="document.getElementById('notepad-textarea').value=''">🧹
+                    Limpiar</span>
+            </div>
+            <textarea id="notepad-textarea"
+                style="flex: 1; border: none; padding: 10px; font-family: Consolas, monospace; font-size: 14px; outline: none; resize: none;"></textarea>
+        </div>
+    </div>
+
+    <!-- simbolo del sistema cmd -->
+    <div id="win-cmd" class="window" style="width: 640px; height: 400px; top: 120px; left: 250px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-cmd')">
+            <div class="ribbon-btn"><img width="12" height="12" src="https://img.icons8.com/3d-fluency/94/console.png"
+                    alt="console" /> Símbolo del sistema</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-cmd')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-cmd')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-cmd')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col"
+            style="background: #0c0c0c; color: #cccccc; font-family: Consolas, monospace; padding: 10px; overflow-y: auto;"
+            onclick="document.getElementById('cmd-input').focus()">
+            <div id="cmd-output">Microsoft Windows [Versión 10.0.22631.3880]<br>(c) Microsoft Corporation. Todos los
+                derechos reservados.<br><br></div>
+            <div style="display: flex;">
+                <span id="cmd-prompt" style="color: #61afef; margin-right: 6px;">C:\Users\Usuario&gt;</span>
+                <input type="text" id="cmd-input"
+                    style="flex: 1; background: transparent; border: none; color: white; font-family: Consolas, monospace; outline: none;"
+                    onkeydown="handleCmdInput(event)">
+            </div>
+        </div>
+    </div>
+
+    <!-- reproductor de musica -->
+    <div id="win-musicplayer" class="window" style="width: 500px; height: 420px; top: 110px; left: 220px;">
+        <div class="title-bar" onmousedown="dragStart(event, 'win-musicplayer')">
+            <div class="ribbon-btn">🎵 Reproductor de Música</div>
+            <div class="window-controls">
+                <button onclick="minimizeWindow('win-musicplayer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/horizontal-line.png"
+                        alt="horizontal-line" /></button>
+                <button onclick="toggleMaximize('win-musicplayer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/full-screen--v1.png"
+                        alt="full-screen--v1" /></button>
+                <button onclick="closeWindow('win-musicplayer')"><img width="10" height="10"
+                        src="https://img.icons8.com/material-outlined/24/delete-sign.png" alt="delete-sign" /></button>
+            </div>
+        </div>
+        <div class="window-content flex-col"
+            style="background: #181818; color: white; padding: 15px; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 12px; color: #aaa;">Mi Playlist</span>
+                <label class="win-btn"
+                    style="cursor: pointer; background: #333; color: white; border: 1px solid #555; font-size: 11px;">
+                    📂 Cargar MP3 <input type="file" accept="audio/mp3, audio/*" onchange="uploadLocalMusic(event)"
+                        style="display:none;">
+                </label>
+            </div>
+
+            <div style="text-align: center; margin: 10px 0;">
+                <div style="font-size: 42px; margin-bottom: 4px;" id="music-album-art">💿</div>
+                <h3 id="music-title" style="font-weight: 500; font-size: 15px;">Selecciona o carga una pista</h3>
+                <p id="music-artist" style="color: #aaa; font-size: 11px;">Local / Web</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <input type="range" id="music-progress" value="0" max="100" style="width: 100%; cursor: pointer;"
+                    oninput="seekAudio(this.value)">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; color: #aaa;">
+                    <span id="music-current-time">0:00</span>
+                    <span id="music-duration">0:00</span>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin: 6px 0;">
+                <button class="win-btn" onclick="prevTrack()"
+                    style="background: #333; color: white; border: none; font-size: 14px; border-radius: 50%; width: 34px; height: 34px; cursor: pointer;">⏮</button>
+                <button class="win-btn" id="play-pause-btn" onclick="togglePlayMusic()"
+                    style="background: #0078d4; color: white; border: none; font-size: 16px; border-radius: 50%; width: 44px; height: 44px; cursor: pointer;">▶</button>
+                <button class="win-btn" onclick="nextTrack()"
+                    style="background: #333; color: white; border: none; font-size: 14px; border-radius: 50%; width: 34px; height: 34px; cursor: pointer;">⏭</button>
+            </div>
+
+            <div class="volume-control" style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                <span>🔊</span>
+                <input type="range" id="volume-slider" min="0" max="100" value="100"
+                    style="cursor: pointer; width: 90px;" oninput="setVolume(this.value)">
+            </div>
+
+            <div style="background: #222; padding: 6px; border-radius: 6px; max-height: 80px; overflow-y: auto;"
+                id="playlist-container">
+                <!-- Lista de canciones -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

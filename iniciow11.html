@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windows 11 - Inicio</title>
+    <link rel="shortcut icon" href="./ico/win11.png" type="image/x-icon">
+<style>
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+  html, body { 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background: #000; 
+    font-family: "Segoe UI", system-ui, sans-serif; 
+    cursor: none; }
+
+  /* ================= pantalla de inicio ================= */
+  #boot {
+    position: fixed; inset: 0; background: #000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 10; transition: opacity .8s ease;
+  }
+  #boot.hide { opacity: 0; pointer-events: none; }
+
+  /* logo */
+  #boot-logo {
+    width: 96px; height: 96px; margin-bottom: 140px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; animation: logoIn 1.2s ease .3s forwards;
+  }
+  #boot-logo img { width: 100%; height: 100%; object-fit: contain; }
+  /* placeholder genrico si no hay imagen */
+  #boot-logo .placeholder {
+    width: 80px; height: 80px; border-radius: 22px;
+    background: linear-gradient(135deg, #4cc2ff, #0067c0);
+    box-shadow: 0 0 40px rgba(76,194,255,.35);
+  }
+  @keyframes logoIn { to { opacity: 1; } }
+
+  /* punteado redondo */
+  .spinner {
+    position: absolute; bottom: 12%; left: 50%;
+    width: 40px; height: 40px; margin-left: -20px;
+    opacity: 0; animation: logoIn .6s ease 1.2s forwards;
+  }
+  .spinner span {
+    position: absolute; inset: 0;
+    animation: orbit 3.6s cubic-bezier(.45, .05, .55, .95) infinite;
+    opacity: 0;
+  }
+  .spinner span::before {
+    content: ""; position: absolute; top: 0; left: 50%;
+    width: 5px; height: 5px; margin-left: -2.5px;
+    background: #fff; border-radius: 50%;
+  }
+  .spinner span:nth-child(1) { animation-delay: 0s; }
+  .spinner span:nth-child(2) { animation-delay: .15s; }
+  .spinner span:nth-child(3) { animation-delay: .30s; }
+  .spinner span:nth-child(4) { animation-delay: .45s; }
+  .spinner span:nth-child(5) { animation-delay: .60s; }
+  @keyframes orbit {
+    0%   { transform: rotate(0deg);    opacity: 1; }
+    75%  { transform: rotate(360deg);  opacity: 1; }
+    76%  { transform: rotate(360deg);  opacity: 0; }
+    100% { transform: rotate(360deg);  opacity: 0; }
+  }
+
+  /* ================= escritorio ================= */
+  #desktop {
+    position: fixed; inset: 0; z-index: 1;
+    background: radial-gradient(120% 120% at 20% 20%, #5aa9ff 0%, #1d4fd8 45%, #0a1f6b 100%);
+    cursor: default;
+  }
+  #taskbar {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 48px;
+    background: rgba(243,243,243,.85); backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0,0,0,.08);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  #taskbar .icon { width: 28px; height: 28px; border-radius: 6px; background: rgba(0,0,0,.15); }
+
+  /* ================= pantalla login ================= */
+  #login {
+    position: fixed; inset: 0; z-index: 5; cursor: default;
+    background: radial-gradient(120% 120% at 20% 20%, #5aa9ff 0%, #1d4fd8 45%, #0a1f6b 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #fff; transition: opacity .6s ease;
+  }
+  #login::before {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(0,0,0,.25); backdrop-filter: blur(30px);
+  }
+  #login > * { position: relative; }
+  #login.hide { opacity: 0; pointer-events: none; }
+
+  #avatar {
+    width: 160px; height: 160px; border-radius: 50%; overflow: hidden;
+    background: rgba(255,255,255,.25);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,.35);
+  }
+  #avatar img { width: 100%; height: 100%; object-fit: cover; }
+  #avatar svg { width: 70%; height: 70%; fill: rgba(255,255,255,.85); }
+
+  #user-name { margin-top: 18px; font-size: 26px; font-weight: 600; }
+
+  #pin-form {
+    margin-top: 24px; display: flex; align-items: center;
+    width: 280px; background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3); border-bottom: 2px solid rgba(255,255,255,.6);
+    border-radius: 6px; overflow: hidden;
+  }
+  #pin-form:focus-within { background: rgba(255,255,255,.25); border-bottom-color: #4cc2ff; }
+  #pin-input {
+    flex: 1; padding: 10px 12px; background: transparent; border: 0; outline: 0;
+    color: #fff; font-size: 15px; font-family: inherit;
+  }
+  #pin-input::placeholder { color: rgba(255,255,255,.75); }
+  #pin-btn {
+    width: 40px; align-self: stretch; border: 0; background: transparent;
+    color: #fff; font-size: 18px; cursor: pointer;
+  }
+  #pin-btn:hover { background: rgba(255,255,255,.2); }
+
+  #login-error { margin-top: 14px; height: 20px; font-size: 14px; color: #ffd6d6; }
+  #pin-form.shake { animation: shake .4s; }
+  @keyframes shake {
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+</style>
+</head>
+<body>
+
+<div id="desktop">
+  <div id="taskbar">
+    <div class="icon"></div><div class="icon"></div><div class="icon"></div>
+  </div>
+</div>
+
+<div id="login">
+  <div id="avatar"></div>
+  <div id="user-name"></div>
+  <form id="pin-form" autocomplete="off">
+    <input id="pin-input" type="password" inputmode="numeric" placeholder="Pin" autocomplete="off">
+    <button id="pin-btn" type="submit" aria-label="Entrar">&rarr;</button>
+  </form>
+  <div id="login-error"></div>
+</div>
+
+<div id="boot">
+  <div id="boot-logo"></div>
+  <div class="spinner"><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<script>
+  // ===== configuracion =====
+  const CONFIG = {
+    logoSrc: "./ico/win11.png",          
+    bootDuration: 6000,   
+    skipOnKey: true,     
+
+    // login
+    pin: "1234",          
+    userName: "IFTS N°4",  
+    avatarSrc: "./ico/ifts4.png"
+  };
+
+  const boot = document.getElementById("boot");
+  const logoBox = document.getElementById("boot-logo");
+
+  if (CONFIG.logoSrc) {
+    const img = document.createElement("img");
+    img.src = CONFIG.logoSrc;
+    img.alt = "logo";
+    logoBox.appendChild(img);
+  } else {
+    logoBox.innerHTML = '<div class="placeholder"></div>';
+  }
+
+  let finished = false;
+  function finishBoot() {
+    if (finished) return;
+    finished = true;
+    boot.classList.add("hide");
+    setTimeout(() => boot.remove(), 900);
+    // ejecuta pantalla de bloqueo / login / escritorio
+    document.dispatchEvent(new CustomEvent("boot:done"));
+  }
+
+  setTimeout(finishBoot, CONFIG.bootDuration);
+  if (CONFIG.skipOnKey) {
+    window.addEventListener("keydown", finishBoot, { once: true });
+    window.addEventListener("click", finishBoot, { once: true });
+  }
+
+  // ===== login =====
+  const login = document.getElementById("login");
+  const avatar = document.getElementById("avatar");
+  const pinForm = document.getElementById("pin-form");
+  const pinInput = document.getElementById("pin-input");
+  const loginError = document.getElementById("login-error");
+
+  document.getElementById("user-name").textContent = CONFIG.userName;
+
+  if (CONFIG.avatarSrc) {
+    const img = document.createElement("img");
+    img.src = CONFIG.avatarSrc;
+    img.alt = "";
+    avatar.appendChild(img);
+  } else {
+    avatar.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21c0-4.7 3.8-7.5 8.5-7.5s8.5 2.8 8.5 7.5z"/></svg>';
+  }
+
+  document.addEventListener("boot:done", () => setTimeout(() => pinInput.focus(), 300));
+
+  pinForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (pinInput.value === CONFIG.pin) {
+      sessionStorage.setItem("logueado", "1");
+      login.classList.add("hide");
+      setTimeout(() => { window.location.href = "index.html"; }, 600);
+    } else {
+      loginError.textContent = "El PIN es incorrecto. intentalo de nuevo.";
+      pinInput.value = "";
+      pinForm.classList.remove("shake");
+      void pinForm.offsetWidth;
+      pinForm.classList.add("shake");
+      pinInput.focus();
+    }
+  });
+</script>
+</body>
+</html>
